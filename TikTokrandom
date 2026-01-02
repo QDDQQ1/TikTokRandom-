@@ -25,7 +25,7 @@ P2 = '\x1b[38;5;190m'  # أخضر ليموني
 sd = random.choice([B, O, X, F, R, L, C, A, W, J, J1, J2, J21, J22, F1, C1, P1, P2])
 
 def look():
-	print(f"""{J} ▬▬{W}▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬{C1}▬▬{J22}Ā₣ŔΐŦ{C1}▬▬{W}▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬{J}▬▬
+        print(f"""{J} ▬▬{W}▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬{C1}▬▬{J22}Ā₣ŔΐŦ{C1}▬▬{W}▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬{J}▬▬
 {sd}
        █████╗  ███████╗ ██████╗  ██╗ ████████╗
       ██╔══██╗ ██╔════╝ ██╔══██╗ ██║ ╚══██╔══╝
@@ -33,7 +33,7 @@ def look():
       ██╔══██║ ██╔══╝   ██╔══██╗ ██║    ██║
       ██║  ██║ ██║      ██║  ██║ ██║    ██║
 {sd}      ╚═╝  ╚═╝ ╚═╝      ╚═╝  ╚═╝ ╚═╝    ╚═╝
-        {X}¸.•´¯`•.¸¸ {J22} F-Trind-V2 {X}¸.•´¯`•.¸¸         
+        {X}¸.•´¯`•.¸¸ {J22} F-Trind-V2 {X}¸.•´¯`•.¸¸
                 {F}TLE :   @oo22bb / AFR_0
 {J} ▬▬{W}▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬{C1}▬▬{J22}Ā₣ŔΐŦ{C1}▬▬{W}▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬{J}▬▬""")
 look()
@@ -52,10 +52,10 @@ def update_display():
       ██╔══██║ ██╔══╝   ██╔══██╗ ██║    ██║
       ██║  ██║ ██║      ██║  ██║ ██║    ██║
 {sd}      ╚═╝  ╚═╝ ╚═╝      ╚═╝  ╚═╝ ╚═╝    ╚═╝
-        {X}¸.•´¯`•.¸¸ {J22} F-Trind-V2 {X}¸.•´¯`•.¸¸         
+        {X}¸.•´¯`•.¸¸ {J22} F-Trind-V2 {X}¸.•´¯`•.¸¸
                 {F}TLE :   @oo22bb / AFR_0
 {J} ▬▬{W}▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬{C1}▬▬{J22}Ā₣ŔΐŦ{C1}▬▬{W}▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬{J}▬▬
-		{R}FA: {dead} - {F}TR: {yas}
+                {R}FA: {dead} - {F}TR: {yas}
 """
     sys.stdout.write('\033[H\033[J')
     sys.stdout.write(lok + '\n')
@@ -86,17 +86,17 @@ def check_proxy(proxy, index, total):
   if '://' in proxy:
    px = {'http': proxy, 'https': proxy}
   else:
-   px = {'http': f'http://{proxy}', 'https': f'http://{proxy}'} 
+   px = {'http': f'http://{proxy}', 'https': f'http://{proxy}'}
   ul, pm, h2 = get_pm()
   ss = requests.Session()
-  r = ss.post(ul, params=pm, headers=h2, proxies=px, timeout=10)  
+  r = ss.post(ul, params=pm, headers=h2, proxies=px, timeout=10)
   if r.status_code == 200:
    try:
     data = r.json()
-    if data.get('message') == 'success':
+    if 'success' and 'ticket' or 'null' in r:
      yas += 1
-     with open("proxses.txt", "w", encoding="utf-8") as file:
-     	file.write(proxy + '\n')
+     with open("Proxy_Hit.txt", "a", encoding="utf-8") as file:
+        file.write(f'{proxy}\n')
      update_display()
      return proxy, True
     else:
@@ -111,7 +111,7 @@ def check_proxy(proxy, index, total):
    dead += 1
    update_display()
    return proxy, False
-   
+
  except Exception as e:
   dead += 1
   update_display()
@@ -130,3 +130,4 @@ with ThreadPoolExecutor(max_workers=3) as executor:
   else:
    dead_list.append(proxy)
 time.sleep(2)
+
